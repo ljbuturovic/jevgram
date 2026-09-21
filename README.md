@@ -29,6 +29,7 @@ PDF extraction uses `pypdf`. DOCX extraction is handled directly from the Word X
 
 # Detailed instructions
 
+
 ## Install
 
 With `pipx` (MacOS, Linux):
@@ -43,17 +44,31 @@ With `uvx`:
 uvx jevgram --help
 ```
 
-## API key
+## Get a TypeSafe API key
 
-`jevgram` uses TypeSafe JEV API. Set one of these environment variables before running it:
+`jevgram` needs a TypeSafe API key to call JEV.
+
+1. Open the TypeSafe API keys page:
+
+   <https://console.typesafe.ai/settings/keys>
+
+   If you are asked to sign in, sign in first. If you do not have TypeSafe access yet, request access at <https://typesafe.ai>.
+
+2. Click **Create key** or **New API key**.
+
+3. Copy the key and save it somewhere private.
+
+   Do not put API keys in GitHub, screenshots, shared documents, or chat messages.
+
+4. Set the key in your terminal:
 
 ```bash
-export TYPESAFE_API_KEY="your-key"
-# or
-export JEV_API_KEY="your-key"
+export TYPESAFE_API_KEY="paste-your-key-here"
 ```
 
-You can also pass a key directly with `--api-key`, but environment variables are safer for shell history and scripts.
+To avoid setting the key every time, add the export TYPESAFE_API_KEY=... line to your shell profile, such as ~/.bashrc or ~/.zshrc.
+
+You can also pass a key directly with `--api-key`, but environment variables are safer/easier.
 
 ## Usage
 
