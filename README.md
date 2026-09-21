@@ -93,16 +93,16 @@ Human-readable output includes the predicted class, AI probability, human probab
 
 This app is open-source/free on my end, but it uses JEV API, which is
 not free. Works like this: once you create a TypeSafe account and API
-key, you automatically get a credit for $5 free usage. jevgram is
-intended for personal use, and you can check a lot of documents for $5
-(I tried dozens so far, I have yet to spend 1 cent). Once you use up
-the free credit, jevgram will fail and politely tell you to add credit
-card number to TypeSafe (to be fair, this is untested because I have
-not reached that point yet, but Codex assures me it'll work :-) )
+key, you may get a credit for $5 free usage. jevgram is intended for
+personal use, and you can check a lot of documents for $5 (I tried
+dozens so far, I have yet to spend 1 cent). Once you use up the free
+credit, jevgram will fail and politely tell you to add credit card
+number to TypeSafe (to be fair, this is untested because I have not
+reached that point yet)
 
 ## Notes
 
-Authorship detection is probabilistic.
-
-This document is mostly AI :-) 
+Authorship detection is probabilistic, so if you run jevgram multiple
+times on the same document, you'll get different (though pretty
+similar) probablities
 
