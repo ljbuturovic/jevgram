@@ -1,0 +1,17 @@
+[project]
+name = "jevgram"
+version = "0.1.0"
+description = "Check if input file is AI or human-generated. Like pangram, but cheaper. Requires TYPESAFE_API_KEY"
+readme = "README.md"
+authors = [
+    { name = "Ljubomir Buturovic", email = "ljubomir@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+jevgram = "jevgram.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.8.4,<0.9.0"]
+build-backend = "uv_build"
