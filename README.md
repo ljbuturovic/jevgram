@@ -11,7 +11,7 @@
 ## Minimal example:
 
 ```bash
-Go to https://typesafe.ai and get an API key. Copy the key
+Go to https://console.typesafe.ai/login and create an API key. Copy the key
 $ export TYPESAFE_API_KEY=apikey_...
 $ pipx install jevgram
 $ jevgram README.md # try jevgram on this document
