@@ -1,6 +1,6 @@
 # jevgram
 
-`jevgram` is a small command-line tool that checks if a document is AI-generated. Similar to pangram but a lot cheaper. You need API key from TYPESAFE_API_KEY (super easy, couple of clicks)
+`jevgram` is a command-line tool that checks if a document is AI-generated. Similar to pangram but a lot cheaper (you'll need API key from https://typesafe.ai - free, super easy, couple of clicks)
 
 ## Supported inputs
 
