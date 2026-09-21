@@ -1,16 +1,34 @@
 [project]
 name = "jevgram"
 version = "0.1.0"
-description = "Check if input file is AI or human-generated. Like pangram, but cheaper. Requires TYPESAFE_API_KEY"
+description = "Classify text, PDF, and DOCX documents as AI- or human-authored using JEV"
 readme = "README.md"
 authors = [
     { name = "Ljubomir Buturovic", email = "ljubomir@gmail.com" }
 ]
-requires-python = ">=3.12"
-dependencies = []
+requires-python = ">=3.10"
+dependencies = [
+    "pypdf>=6.19.0",
+]
+keywords = ["ai-detection", "authorship", "jev", "cli"]
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Text Processing",
+    "Topic :: Utilities",
+]
 
 [project.scripts]
 jevgram = "jevgram.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/ljbuturovic/jevgram"
+Repository = "https://github.com/ljbuturovic/jevgram"
+Issues = "https://github.com/ljbuturovic/jevgram/issues"
 
 [build-system]
 requires = ["uv_build>=0.8.4,<0.9.0"]
