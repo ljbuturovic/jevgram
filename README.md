@@ -1,6 +1,6 @@
 # jevgram
 
-`jevgram` is a small command-line tool that estimates whether a document was primarily written by AI or by a human using JEV. It is intended as a lightweight, scriptable alternative for occasional authorship checks.
+`jevgram` is a small command-line tool that checks if a document is AI-generated. Similar to pangram but a lot cheaper. You need API key from TYPESAFE_API_KEY (super easy, couple of clicks)
 
 ## Supported inputs
 
@@ -8,11 +8,30 @@
 - PDF files
 - DOCX files
 
+## Minimal example (this document is mostly AI :-) ):
+
+```bash
+$ export TYPESAFE_API_KEY=apikey_...
+$ pipx install jevgram
+$ jevgram README.md # this document
+File: README.md
+Type: text
+Characters extracted: 1957
+Characters sent to JEV: 1957
+Model: jev-1.13.0
+Prediction: AI
+Probability AI: 87.00%
+Probability human: 13.00%
+Confidence: 74.00%
+```
+
 PDF extraction uses `pypdf`. DOCX extraction is handled directly from the Word XML contained in the `.docx` file.
+
+# Detailed instructions
 
 ## Install
 
-With `pipx`:
+With `pipx` (MacOS, Linux):
 
 ```bash
 pipx install jevgram
@@ -26,7 +45,7 @@ uvx jevgram --help
 
 ## API key
 
-`jevgram` calls the TypeSafe JEV API. Set one of these environment variables before running it:
+`jevgram` uses TypeSafe JEV API. Set one of these environment variables before running it:
 
 ```bash
 export TYPESAFE_API_KEY="your-key"
@@ -66,6 +85,17 @@ jevgram document.txt --dump-request
 
 Human-readable output includes the predicted class, AI probability, human probability, confidence when provided by JEV, and whether the input was truncated. `--json` produces machine-readable output for scripts.
 
+## Cost
+
+Once you get a TYPESAFE account and API key, you get a credit for $5
+free usage. jevgram is intended for personal use, and you can check a
+lot of documents for $5. Once you use up the free credit, jevgram will
+fail and TYPESAFE will probably ask for credit card number (I have not
+reached that point yet)
+
 ## Notes
 
-Authorship detection is probabilistic. Treat the result as one signal, not as proof. Results can vary with document length, extraction quality, formatting, and how much of the document is sent to JEV.
+Authorship detection is probabilistic.
+
+This document is mostly AI :-) 
+
