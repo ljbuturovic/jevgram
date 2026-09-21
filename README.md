@@ -1,6 +1,6 @@
 # jevgram
 
-`jevgram` is a command-line tool that checks if a document is AI-generated. Similar to pangram but a lot cheaper (you'll need API key from https://typesafe.ai - free, super easy, couple of clicks)
+`jevgram` is a command-line tool that checks if a document is AI-generated. Similar to pangram but a lot cheaper (you'll need API key from <https://console.typesafe.ai/login> - free, super easy, couple of clicks)
 
 ## Supported inputs
 
@@ -31,35 +31,23 @@ PDF extraction uses `pypdf`. DOCX extraction is handled directly from the Word X
 # Detailed instructions
 
 
-## Install
-
-With `pipx` (MacOS, Linux):
+## Install (MacOS, Linux; Windows coming up)
 
 ```bash
 pipx install jevgram
 ```
 
-With `uvx`:
-
-```bash
-uvx jevgram --help
-```
-
 ## Get a TypeSafe API key
 
-`jevgram` needs a TypeSafe API key to call JEV.
+   `jevgram` needs a TypeSafe API key to call JEV.
 
-1. Open the TypeSafe API keys page:
+1. Login to TypeSafe: <https://console.typesafe.ai/login>
 
-   <https://console.typesafe.ai/settings/keys>
+   (if you don't have an account, create one, for example just clicking on "Login with Google")
 
-   If you are asked to sign in, sign in first. If you do not have TypeSafe access yet, request access at <https://typesafe.ai>.
-
-2. Click **Create key** or **New API key**.
+2. Click **API Keys** on the left, then **Create API key** on the right
 
 3. Copy the key and save it somewhere private.
-
-   Do not put API keys in GitHub, screenshots, shared documents, or chat messages.
 
 4. Set the key in your terminal:
 
@@ -104,12 +92,13 @@ Human-readable output includes the predicted class, AI probability, human probab
 ## Cost
 
 This app is open-source/free on my end, but it uses JEV API, which is
-not free. Works like this: once you create a TYPESAFE account and API
-key, you get a credit for $5 free usage. jevgram is intended for
-personal use, and you can check a lot of documents for $5. Once you
-use up the free credit, jevgram will fail and politely tell you to add
-credit card number to TYPESAFE (to be fair, this is untested because I
-have not reached that point yet)
+not free. Works like this: once you create a TypeSafe account and API
+key, you automatically get a credit for $5 free usage. jevgram is
+intended for personal use, and you can check a lot of documents for $5
+(I tried dozens so far, I have yet to spend 1 cent). Once you use up
+the free credit, jevgram will fail and politely tell you to add credit
+card number to TypeSafe (to be fair, this is untested because I have
+not reached that point yet, but Codex assures me it'll work :-) )
 
 ## Notes
 
