@@ -3,6 +3,8 @@ name = "jevgram"
 version = "0.1.0"
 description = "Classify text, PDF, and DOCX documents as AI- or human-authored using JEV"
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [
     { name = "Ljubomir Buturovic", email = "ljubomir@gmail.com" }
 ]
@@ -14,6 +16,7 @@ keywords = ["ai-detection", "authorship", "jev", "cli"]
 classifiers = [
     "Environment :: Console",
     "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
