@@ -607,7 +607,7 @@ def print_human_result(
 def parse_args(argv: list[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         prog=f"jevgram {package_version()}",
-        description="Compute AI-vs-human authorship probability for a text, PDF, or DOCX file using JEV.",
+        description="Compute AI-vs-human authorship probability for a text, PDF, or DOCX file using JEV. Like Pangram but cheaper",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser.add_argument(
