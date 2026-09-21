@@ -8,7 +8,7 @@
 - PDF files
 - DOCX files
 
-## Minimal example (this document is mostly AI :-) ):
+## Minimal example:
 
 ```bash
 $ export TYPESAFE_API_KEY=apikey_...
