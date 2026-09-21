@@ -87,11 +87,13 @@ Human-readable output includes the predicted class, AI probability, human probab
 
 ## Cost
 
-Once you get a TYPESAFE account and API key, you get a credit for $5
-free usage. jevgram is intended for personal use, and you can check a
-lot of documents for $5. Once you use up the free credit, jevgram will
-fail and TYPESAFE will probably ask for credit card number (I have not
-reached that point yet)
+This app is open-source/free on my end, but it uses JEV API, which is
+not free. Works like this: once you create a TYPESAFE account and API
+key, you get a credit for $5 free usage. jevgram is intended for
+personal use, and you can check a lot of documents for $5. Once you
+use up the free credit, jevgram will fail and politely tell you to add
+credit card number to TYPESAFE (to be fair, this is untested because I
+have not reached that point yet)
 
 ## Notes
 

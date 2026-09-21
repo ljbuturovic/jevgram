@@ -256,6 +256,81 @@ def build_request_body(text: str, model: str, instructions: str) -> dict[str, An
     }
 
 
+def format_jev_http_error(status_code: int, reason: str, body_text: str) -> str:
+    provider_message = extract_provider_error_message(body_text) or reason
+    message_lower = provider_message.lower()
+
+    if status_code == 402 or has_billing_error_terms(message_lower):
+        return (
+            "JEV request was declined because your TypeSafe account appears to be out of credits "
+            "or needs billing setup. Open the TypeSafe console, add credits or a payment method, "
+            f"then retry. Provider response (HTTP {status_code}): {provider_message}"
+        )
+
+    if status_code in {401, 403}:
+        return (
+            "JEV request was not authorized. Check TYPESAFE_API_KEY/JEV_API_KEY, or create a new "
+            f"TypeSafe API key. Provider response (HTTP {status_code}): {provider_message}"
+        )
+
+    if status_code == 429:
+        return (
+            "JEV request was rate-limited or rejected by account limits. Wait and retry; if the "
+            "provider response mentions credits or billing, add credits or a payment method in "
+            f"TypeSafe. Provider response (HTTP {status_code}): {provider_message}"
+        )
+
+    return f"JEV request failed with HTTP {status_code}: {provider_message}"
+
+
+def extract_provider_error_message(body_text: str) -> str:
+    if not body_text:
+        return ""
+
+    try:
+        body = json.loads(body_text)
+    except json.JSONDecodeError:
+        return body_text
+
+    extracted = extract_error_text(body)
+    if extracted:
+        return extracted
+    return body_text
+
+
+def extract_error_text(value: Any) -> str:
+    if isinstance(value, str):
+        return value.strip()
+    if isinstance(value, dict):
+        for key in ("error", "message", "detail", "code", "type"):
+            if key in value:
+                text = extract_error_text(value[key])
+                if text:
+                    return text
+    if isinstance(value, list):
+        for item in value:
+            text = extract_error_text(item)
+            if text:
+                return text
+    return ""
+
+
+def has_billing_error_terms(message_lower: str) -> bool:
+    billing_terms = (
+        "billing",
+        "credit",
+        "balance",
+        "payment",
+        "card",
+        "prepaid",
+        "quota",
+        "spend",
+        "insufficient",
+        "exhausted",
+    )
+    return any(term in message_lower for term in billing_terms)
+
+
 def call_jev(
     body: dict[str, Any],
     endpoint: str,
@@ -280,8 +355,8 @@ def call_jev(
             raw = response.read()
     except urllib.error.HTTPError as exc:
         body_text = exc.read().decode("utf-8", errors="replace").strip()
-        message = body_text or exc.reason
-        raise JevgramError(f"JEV request failed with HTTP {exc.code}: {message}") from exc
+        message = format_jev_http_error(exc.code, str(exc.reason), body_text)
+        raise JevgramError(message) from exc
     except urllib.error.URLError as exc:
         raise JevgramError(f"JEV request failed: {exc.reason}") from exc
     except TimeoutError as exc:
