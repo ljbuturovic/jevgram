@@ -11,18 +11,19 @@
 ## Minimal example:
 
 ```bash
+Go to https://typesafe.ai and get an API key. Copy the key
 $ export TYPESAFE_API_KEY=apikey_...
 $ pipx install jevgram
-$ jevgram README.md # this document
+$ jevgram README.md # try jevgram on this document
 File: README.md
 Type: text
-Characters extracted: 1957
-Characters sent to JEV: 1957
+Characters extracted: 3044
+Characters sent to JEV: 3044
 Model: jev-1.13.0
 Prediction: AI
-Probability AI: 87.00%
-Probability human: 13.00%
-Confidence: 74.00%
+Probability AI: 79.00%
+Probability human: 21.00%
+Confidence: 58.00%
 ```
 
 PDF extraction uses `pypdf`. DOCX extraction is handled directly from the Word XML contained in the `.docx` file.
