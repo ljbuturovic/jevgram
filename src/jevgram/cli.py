@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 import os
 import shutil
 import subprocess
@@ -140,6 +141,10 @@ def _paragraphs_from_word_xml(xml_bytes: bytes, part_name: str) -> list[str]:
 
 def extract_pdf_text(path: Path) -> str:
     errors: list[str] = []
+
+    # pypdf can emit noisy font-decoding warnings for PDFs whose text still extracts well.
+    for logger_name in ("pypdf", "PyPDF2"):
+        logging.getLogger(logger_name).setLevel(logging.ERROR)
 
     for module_name in ("pypdf", "PyPDF2"):
         try:
