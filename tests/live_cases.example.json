@@ -2,6 +2,7 @@
   {
     "name": "strong_human_example",
     "path": "/absolute/path/to/human-document.pdf",
+    "pangram_ai": 0.10,
     "min_ai": 0.0,
     "max_ai": 0.35,
     "note": "Example: strongly human document; real local cases belong in tests/live_cases.json"

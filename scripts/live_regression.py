@@ -17,10 +17,10 @@ class CaseResult:
     name: str
     path: str
     probability_ai: float | None
+    pangram_ai: float | None
     min_ai: float
     max_ai: float
     passed: bool
-    note: str
 
 
 def load_cases(path: Path) -> list[dict[str, Any]]:
@@ -41,7 +41,11 @@ def run_case(case: dict[str, Any], command: str) -> CaseResult:
     doc_path = str(case["path"])
     min_ai = float(case.get("min_ai", 0.0))
     max_ai = float(case.get("max_ai", 1.0))
-    note = str(case.get("note", ""))
+    pangram_ai = case.get("pangram_ai")
+    if pangram_ai is None and "pangram_human" in case:
+        pangram_ai = 1.0 - float(case["pangram_human"])
+    elif pangram_ai is not None:
+        pangram_ai = float(pangram_ai)
 
     result = subprocess.run(
         [command, doc_path, "--json"],
@@ -52,34 +56,33 @@ def run_case(case: dict[str, Any], command: str) -> CaseResult:
     if result.returncode != 0:
         message = result.stderr.strip() or result.stdout.strip() or f"exit {result.returncode}"
         print(f"ERROR {name}: {message}", file=sys.stderr)
-        return CaseResult(name, doc_path, None, min_ai, max_ai, False, note)
+        return CaseResult(name, doc_path, None, pangram_ai, min_ai, max_ai, False)
 
     try:
         payload = json.loads(result.stdout)
     except json.JSONDecodeError as exc:
         print(f"ERROR {name}: non-JSON output: {exc}", file=sys.stderr)
-        return CaseResult(name, doc_path, None, min_ai, max_ai, False, note)
+        return CaseResult(name, doc_path, None, pangram_ai, min_ai, max_ai, False)
 
     probability_ai = payload.get("probability_ai")
     if not isinstance(probability_ai, (int, float)):
         print(f"ERROR {name}: missing numeric probability_ai", file=sys.stderr)
-        return CaseResult(name, doc_path, None, min_ai, max_ai, False, note)
+        return CaseResult(name, doc_path, None, pangram_ai, min_ai, max_ai, False)
 
     probability_ai = float(probability_ai)
     passed = min_ai <= probability_ai <= max_ai
-    return CaseResult(name, doc_path, probability_ai, min_ai, max_ai, passed, note)
+    return CaseResult(name, doc_path, probability_ai, pangram_ai, min_ai, max_ai, passed)
 
 
 def print_results(results: list[CaseResult]) -> None:
-    print("status  ai_prob  expected     name")
-    print("------  -------  --------     ----")
+    print(f"{'status':6}  {'pangram_ai':>10}  {'jevgram_ai':>10}  {'expected':>11}  name")
+    print(f"{'------':6}  {'----------':>10}  {'----------':>10}  {'--------':>11}  ----")
     for result in results:
         status = "PASS" if result.passed else "FAIL"
-        ai_prob = "n/a" if result.probability_ai is None else f"{result.probability_ai:.2%}"
+        pangram_ai = "n/a" if result.pangram_ai is None else f"{result.pangram_ai:.0%}"
+        jevgram_ai = "n/a" if result.probability_ai is None else f"{result.probability_ai:.0%}"
         expected = f"{result.min_ai:.0%}-{result.max_ai:.0%}"
-        print(f"{status:6}  {ai_prob:>7}  {expected:<11}  {result.name}")
-        if result.note:
-            print(f"        note: {result.note}")
+        print(f"{status:6}  {pangram_ai:>10}  {jevgram_ai:>10}  {expected:>11}  {result.name}")
 
 
 def parse_args(argv: list[str]) -> argparse.Namespace:
