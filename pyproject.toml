@@ -36,3 +36,8 @@ Issues = "https://github.com/ljbuturovic/jevgram/issues"
 [build-system]
 requires = ["uv_build>=0.8.4,<0.9.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
