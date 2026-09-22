@@ -1,6 +1,6 @@
 [project]
 name = "jevgram"
-version = "0.1.5"
+version = "0.1.6"
 description = "Classify text, PDF, and DOCX documents as AI- or human-authored using JEV. Like Pangram, but cheaper"
 readme = "README.md"
 license = "MIT"
