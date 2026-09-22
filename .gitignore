@@ -8,3 +8,6 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Local live regression cases may contain private paths.
+tests/live_cases.json
